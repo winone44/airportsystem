@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+            <div class="layout__box">
+                <div class="layout__boxHeader">
+                    <div class="layout__boxTitle">
+
+                        <h3 style="padding-left: 30px">Panel Sterowania</h3>
+                    </div>
+                </div>
+
+                <div class="topics-page layout__body">
+                    <div style="padding-bottom: 10px;">
+                        <div style="float: left;">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div style="float: left; padding: 5px;">
+                            <p>Drzwi wejściowe</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div style="padding-bottom: 10px;">
+                        <div style="float: left;">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div style="float: left; padding: 5px;">
+                            <p>Światła</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div style="padding-bottom: 10px;">
+                        <div style="float: left;">
+                            <label class="switch">
+                                <input type="checkbox" checked onclick="window.alert('Sortownia zmieniła tryb pracy!')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div style="float: left; padding: 5px; border: 1px solid yellow; background-color: black; color: yellow;
+                                        border-radius: 5px; text-transform: uppercase;">
+                            <p>Sortownia Bagaży</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div style="padding-bottom: 10px;">
+                        <div style="float: left;">
+                            <label class="switch">
+                                <input type="checkbox" onclick="window.alert('!!!Służby poinformowane!!!')">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div style="float: left; padding: 5px; border: 1px solid red; background-color: black; color: red;
+                                        border-radius: 5px; text-transform: uppercase;">
+                            <p>Alarm Przeciwpożarowy</p>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+            <div class="layout__box">
+                <div class="layout__boxHeader">
+                    <div class="layout__boxTitle">
+                        <a href="{% url 'airport-arrivals-info' %}">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 viewBox="0 0 32 32">
+                                <title>arrow-left</title>
+                                <path
+                                        d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                                ></path>
+                            </svg>
+                        </a>
+                        <h3>Detale</h3>
+                    </div>
+                </div>
+                <div class="topics-page layout__body">
+                <table>
+                    <tr>
+                        <th>Samolot</th>
+                        <th>Pilot</th>
+
+                        <th>Z</th>
+                        <th>Do</th>
+                        <th>Zmień status</th>
+                        <th>Opóżnienie</th>
+                        <th>Koszt</th>
+                        <th>Awaria</th>
+                        <th>Bramy</th>
+
+                    </tr>
+{#                    <tr>#}
+{#                        <td><a href="">Boeing 737</a></td>#}
+{#                        <td><a href="">Mirosław Kwiatek</a></td>#}
+{##}
+{#                        <td>rzeszów</td>#}
+{#                        <td>warszawa</td>#}
+{#                        <td>wylądował</td>#}
+{#                        <td>1 godzina</td>#}
+{#                        <td>1000 zł</td>#}
+{#                        <td>button</td>#}
+{#                        <td>3</td>#}
+{#                    </tr>#}
+
+                    <tr>
+                        <td>Boeing 737</td>
+                        {% for pilot in pilots %}
+                        <td><a href="{% url 'pilot-info' %}?pilotId={{ pilot.id }}">{{ pilot.first_name}} {{ pilot.last_name }}</a></td>
+                        {% endfor %}
+                        {% for flight in flights %}
+                        <td>{{ flight.from_airport }}</td>
+                        <td>{{ flight.to_airport }}</td>
+                        <td>{% include 'base/component/status.html' %}</td>
+                        <td>{{ flight.delay_time_in_h }} h</td>
+                        <td><input id="number" type="number" value="1000" min="1000" max="100000"> $</td>
+                        <td><button onclick="window.alert('!!!Służby zostały wysłane do bramy nr. {{ flight.gate }} !!!')">Powiadom służby</button></td>
+                        <td>{{ flight.gate }}</td>
+                        {% endfor %}
+                    </tr>
+
+                </table>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

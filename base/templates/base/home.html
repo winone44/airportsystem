@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+            <div class="layout__box">
+                <div class="layout__boxHeader">
+                    <div class="layout__boxTitle">
+
+                        <h3>&nbsp&nbsp&nbsp Home</h3>
+                    </div>
+                </div>
+
+                <div class="topics-page layout__body">
+                    <ul class="topics__list">
+                        <li>
+                            <a href="{% url 'airport-arrivals-info' %}">Przyloty</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'airport-departures-info' %}">Odloty</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'airport-search' %}">Wyszukiwarka lotnisk</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

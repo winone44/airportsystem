@@ -1,0 +1,126 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+            <div class="layout__box">
+                <div class="layout__boxHeader">
+                    <div class="layout__boxTitle">
+                        <a href="{{ request.META.HTTP_REFERER }}">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 viewBox="0 0 32 32">
+                                <title>arrow-left</title>
+                                <path
+                                        d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                                ></path>
+                            </svg>
+                        </a>
+                        <h3>Browse Airports</h3>
+                    </div>
+                </div>
+
+                <div class="topics-page layout__body">
+
+                    <div>
+                        <div>
+
+                            <div>
+                                <table>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>ident</th>
+                                        <th>type</th>
+                                        <th>name</th>
+                                        <th>latitude_deg</th>
+                                        <th>longitude_deg</th>
+
+                                    </tr>
+                                    <tr>
+                                        <td>{{ airport_data.id }}</td>
+                                        <td>{{ airport_data.ident }}</td>
+                                        <td>{{ airport_data.type }}</td>
+                                        <td>{{ airport_data.name }}</td>
+                                        <td>{{ airport_data.latitude_deg }}</td>
+                                        <td>{{ airport_data.longitude_deg }}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th>elevation_ft</th>
+                                        <th>continent</th>
+                                        <th>iso_country</th>
+                                        <th>iso_region</th>
+                                        <th>municipality</th>
+                                        <th>scheduled_service</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ airport_data.elevation_ft }}</td>
+                                        <td>{{ airport_data.continent }}</td>
+                                        <td>{{ airport_data.iso_country }}</td>
+                                        <td>{{ airport_data.iso_region }}</td>
+                                        <td>{{ airport_data.municipality }}</td>
+                                        <td>{{ airport_data.scheduled_service }}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>gps_code</th>
+                                        <th>iata_code</th>
+                                        <th>local_code</th>
+                                        <th>home_link</th>
+                                        <th>wikipedia_link</th>
+                                        <th>keywords</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ airport_data.gps_code }}</td>
+                                        <td>{{ airport_data.iata_code }}</td>
+                                        <td>{{ airport_data.local_code }}</td>
+                                        <td><a href="{{ airport_data.home_link }}">link</a></td>
+                                        <td><a href="{{ airport_data.wikipedia_link }}">link</a></td>
+                                        <td>{{ airport_data.keywords }}</td>
+                                    </tr>
+                                    <script>
+                                        function mapContent() {
+                                            var api_key = 'SXuJcKCvSGMjMB2zKf7p20SQBlU2UbaF';
+                                            var latAndLong = {
+                                                lat: {{ airport_data.latitude_deg }},
+                                                lng: {{ airport_data.longitude_deg }}
+                                            };
+                                            var zoomLevel = 10;
+                                            var yourAddress = '{{ airport_data.name }}';
+
+                                            var map = tt.map({
+                                                container: 'map',
+                                                key: api_key,
+                                                center: latAndLong,
+                                                zoom: zoomLevel
+                                            });
+
+                                            var marker = new tt.Marker().setLngLat(latAndLong).addTo(map);
+
+                                            var popupOffsets = {
+                                                top: [0, 0],
+                                                bottom: [0, -70],
+                                                'bottom-right': [0, -70],
+                                                'bottom-left': [0, -70],
+                                                left: [25, -35],
+                                                right: [-25, -35]
+                                            }
+
+                                            var popup = new tt.Popup({offset: popupOffsets}).setHTML(yourAddress);
+                                            marker.setPopup(popup).togglePopup();
+
+                                        }
+
+                                    </script>
+                                    {#                        {% endfor %}#}
+                                    <div id='map'></div>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        function printContent(el) {
+            var restorepage = $('body').html();
+            var printcontent = $('#' + el).clone();
+            $('body').empty().html(printcontent);
+            window.print();
+            $('body').html(restorepage);
+        }
+    </script>
+</head>
+<body>
+<main>
+    <div id="qr">
+        <table style="border: 1px solid">
+            <tr>
+                <td>
+                    <img src="https://chart.googleapis.com/chart?cht=qr&chl=
+                    {{ passenger.id }}{{ phone_number_without }}&chs=160x160&chld=L|0">
+                    <br>
+                    <p>{{ passenger.id }}{{ phone_number_without }}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <button id="print" onclick="printContent('qr');">Print</button>
+
+
+</main>
+</body>
+</html>

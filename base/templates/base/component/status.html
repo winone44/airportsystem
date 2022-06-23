@@ -1,0 +1,20 @@
+{% if flight.status == 0 %}
+    Odwołany
+{% elif flight.status == 1 %}
+    Zaplanowany
+{% elif flight.status == 2 %}
+    Zaplanowany (opóżniony)
+{% elif flight.status == 3 %}
+    Idź do swojej bramki
+{% elif flight.status == 4 %}
+    Ostatnie wezwanie
+{% elif flight.status == 5 %}
+    W locie
+{% elif flight.status == 6 %}
+    W locie (opóżniony)
+{% elif flight.status == 7 %}
+    Wylądował
+{% elif flight.status == 8 %}
+    Wyląował (opóźniony)
+{% endif %}
+

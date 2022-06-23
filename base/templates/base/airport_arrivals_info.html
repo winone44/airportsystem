@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+            <div class="layout__box">
+                <div class="layout__boxHeader">
+                    <div class="layout__boxTitle">
+                        <a href="{% url 'home' %}">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 viewBox="0 0 32 32">
+                                <title>arrow-left</title>
+                                <path
+                                        d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                                ></path>
+                            </svg>
+                        </a>
+                        <h3>Przyloty</h3>
+                    </div>
+                </div>
+                <div class="topics-page layout__body">
+                    <table>
+                        <tr>
+                            <th>Lot</th>
+                            <th>Przewoźnik</th>
+                            <th>Z kierunku</th>
+                            <th>Przylot</th>
+                            <th>Status</th>
+                            <th>Pasażerownie</th>
+                            <th>Terminal</th>
+                            <th>Bramka</th>
+
+                        </tr>
+{#                        <tr>#}
+{#                            <td><a href="{% url 'flight-stats' %}">LO 3803</a></td>#}
+{#                            <td>LOT - Polish Airlines</td>#}
+{#                            <td>(WAW) Warsaw</td>#}
+{#                            <td>00:05</td>#}
+{#                            <td>Wylądował</td>#}
+{#                            <td><a href="{% url 'passenger_inf_a' %}">lista</a></td>#}
+{#                            <td>A</td>#}
+{#                            <td>1</td>#}
+{#                        </tr>#}
+
+                        {% for flight in flights %}
+                        <tr>
+                            <td><a href="{% url 'flight-stats' %}?flyId={{ flight.flight|cut:" " }}">{{ flight.flight }}</a></td>
+                            <td>{{ flight.carrier }}</td>
+                            <td>{{ flight.from_airport }}</td>
+                            <td style="width: 190px">{{ flight.arrival_datetime.ctime }}</td>
+                            <td>{% include 'base/component/status.html' %}</td>
+                            <td><a href="{% url 'passenger_inf_a' flight.flight %}">lista</a></td>
+                            <td>{{ flight.terminal }}</td>
+                            <td>{{ flight.gate }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

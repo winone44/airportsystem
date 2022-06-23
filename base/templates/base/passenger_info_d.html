@@ -1,0 +1,93 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+            <div class="layout__box">
+                <div class="layout__boxHeader">
+                    <div class="layout__boxTitle">
+                        <a href="{% url 'airport-departures-info' %}">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 viewBox="0 0 32 32">
+                                <title>arrow-left</title>
+                                <path
+                                        d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                                ></path>
+                            </svg>
+                        </a>
+                        <h3>Odloty</h3>
+                    </div>
+                </div>
+                <div class="topics-page layout__body">
+                    <form action="" method="GET" class="header__search">
+                        <label>
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                 viewBox="0 0 32 32">
+                                <title>search</title>
+                                <path
+                                        d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
+                                ></path>
+                            </svg>
+                            <input name="q" placeholder="Search for passenger"/>
+                        </label>
+                    </form>
+                    <table>
+                        <tr>
+                            <th>Nazwisko</th>
+                            <th>Imię</th>
+                            <th>Adres</th>
+                            <th>Narodowość</th>
+                            <th>Numer telefonu</th>
+                            <th>Data urodzenia</th>
+                            <th>Numer i seria dowodu</th>
+                            <th>Numer paszportu</th>
+                            <th>Płeć</th>
+                            <th>Miejsce</th>
+                            <th>Dodatkowy bagaż</th>
+                            <th>Numer bagażu</th>
+                        </tr>
+{#                        <tr>#}
+{#                            <td>Kowalski</td>#}
+{#                            <td>Jan</td>#}
+{#                            <td>ul. Polna 25/2, Warszawa 00-000 Mazwoieckie</td>#}
+{#                            <td>Polish</td>#}
+{#                            <td>+48534234134</td>#}
+{#                            <td>22-04-1988</td>#}
+{#                            <td>NWS342452</td>#}
+{#                            <td>JT3450562</td>#}
+{#                            <td>M</td>#}
+{#                            <td>7C</td>#}
+{#                            <td>TAK</td>#}
+{#                            <td><a href="{% url 'generate-code-and-print' %}">generuj kod i drukuj</a></td>#}
+{#                        </tr>#}
+                        {% for passager in passenger_data %}
+                            <tr>
+                                <td>{{ passager.last_name }}</td>
+                                <td>{{ passager.first_name }}</td>
+                                <td>
+                                    ul. {{ passager.street }} {{ passager.house_number }}, {{ passager.city }} {{ passager.zip_code }} {{ passager.state }}</td>
+                                <td>{{ passager.nationality }}</td>
+                                <td>{{ passager.phone_number }}</td>
+                                <td>{{ passager.date_of_birth }}</td>
+                                <td>{{ passager.numberID }}</td>
+                                <td>{{ passager.passport_number }}</td>
+                                <td>{{ passager.sex }}</td>
+                                <td>{{ passager.reserved_seat }}</td>
+                                <td>{{ passager.is_extra_baggage }}</td>
+                                {% if passager.is_extra_baggage == False %}
+                                {% elif passager.baggage_number == Null %}
+                                    <td><a href="{% url 'generate-code-and-print' %}?id={{ passager.id }}">generuj kod i
+                                        drukuj</a></td>
+                                {% else %}
+                                    <td><a href="https://chart.googleapis.com/chart?cht=qr&chl={{ passager.baggage_number }}&chs=160x160&chld=L|0">
+                                        {{ passager.baggage_number }}</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

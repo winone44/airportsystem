@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Board Departures</title>
+    <style>
+        body {
+            background-color: blue;
+            color: white;
+            font-size: 32px;
+        }
+        table {
+            width: 100%;
+        }
+        tr:nth-child(even) {
+            background-color: dodgerblue;
+        }
+        h1 {
+            padding-left: 100px;
+        }
+    </style>
+</head>
+<body>
+<h1>Odloty/Departures</h1>
+<table>
+    <tr>
+        <th>Lot</th>
+        <th>Przewoźnik</th>
+        <th>Kierunek</th>
+        <th>Odlot</th>
+        <th>Status</th>
+        <th>Terminal</th>
+        <th>Bramka</th>
+    </tr>
+{#    <tr>#}
+{#        <td>LO 3804</td>#}
+{#        <td>LOT - Polish Airlines</td>#}
+{#        <td>(WAW) Warsaw</td>#}
+{#        <td>05:45</td>#}
+{#        <td>Wylądował (opóźnienie)</td>#}
+{#        <td>A</td>#}
+{#        <td>1</td>#}
+{#    </tr>#}
+    {% for flight in flights %}
+    <tr>
+        <td>{{ flight.flight }}</td>
+        <td>{{ flight.carrier }}</td>
+        <td>{{ flight.to_airport }}</td>
+        <td style="width: 200px">{{ flight.departure_datetime.ctime }}</td>
+        <td>{% include 'base/component/status.html' %}</td>
+        <td>{{ flight.terminal }}</td>
+        <td>{{ flight.gate }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
