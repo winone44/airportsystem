@@ -7,11 +7,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-# from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-# from .models import model
-
-# Create your views here.
-
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -67,16 +62,6 @@ def airport(request):
     context = {'airport_data': airport_data}
     return render(request, 'base/airport_info.html', context)
 
-
-# def email_autocomplete(request):
-#     if request.GET.get('q'):
-#         q = request.GET['q']
-#         data = model.objects.using('legacy').filter(email__startswith=q).values_list('email', flat=True)
-#         json = list(data)
-#         return JsonResponse(json, safe=False)
-#     else:
-#         HttpResponse("No cookies")
-
 @staff_member_required
 def flightStats(request):
     fly_id = request.GET.get("flyId")
@@ -114,10 +99,6 @@ def passenger_inf_a(request, flight):
     )[0:10]
     context = {'passenger_data': passenger_data, 'flight': flight}
     return render(request, 'base/passenger_info_a.html', context)
-
-    # q = request.GET.get('q') if request.GET.get('q') != None else ''
-    # airport_request = Airport.objects.filter(name__icontains=q)[0:10]
-    # return render(request, 'base/airport_search.html', {'airport_request': airport_request})
 
 
 @login_required(login_url='login')
