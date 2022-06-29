@@ -1192,6 +1192,7 @@ td {
 #stopka {
 	position: fixed;
 	height: 40px;
+    margin-left: 20px;
 	bottom: 0;
 }
 
